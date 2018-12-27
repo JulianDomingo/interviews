@@ -1,2 +1,2 @@
-# leetcode
-A Leetcode a day keeps unemployment away
+# interviews
+Random coding questions I've tackled from various prep sites
