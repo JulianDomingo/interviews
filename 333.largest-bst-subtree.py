@@ -34,6 +34,12 @@
 # Follow up:
 # Can you figure out ways to solve it with O(n) time complexity?
 #
+#    3
+#   / \
+#  2   4
+#     /
+#    1
+#
 #
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -41,6 +47,16 @@
 #		  self.val = x
 #		  self.left = None
 #		  self.right = None
+class Result(object):
+	def __init__(self,
+				 largest=0,
+				 min=float('inf'),
+			 	 max=float('-inf')):
+
+		self.largest = largest
+		self.min = min
+		self.max = max
+
 
 class Solution(object):
 	def largestBSTSubtree(self, root):
@@ -48,4 +64,22 @@ class Solution(object):
 		:type root: TreeNode
 		:rtype: int
 		"""
+		# Use a postorder traversal (left -> right -> root), but return an
+		# object containing the largest size, but also the smallest and largest
+		# value in the particular subtree.
+		def postorder(root):
+			if not root:
+				return Result(0, 0, 0)
 
+			left = postorder(root.left)
+			right = postorder(root.right)
+
+			if left.max < root.val < right.min:
+				res = Result
+			else:
+				return Result(0, float('-inf'), float('inf'))
+
+
+		res = 0
+		postorder(root)
+		return res
